@@ -2,7 +2,7 @@ import sqlite3
 import datetime
 import sys
 
-" Database classes "
+""" Database classes """
 
 
 class Database:
@@ -119,7 +119,7 @@ class Database:
         # returning statement for manager object to execute.
         return statement
 
-    """Functions to display all database records sorted by column."""
+    """Functions to display all database records sorted by column"""
 
     def sort_by_title(self):
         """Sorted by Title"""
@@ -202,7 +202,7 @@ class Database:
               )
 
 
-" Program classes "
+""" Program classes """
 
 
 class MainMenu:
@@ -396,10 +396,10 @@ class ExitSystem:
         print("Data successfully saved."
               "\nClosing system...")
         # closing system
-        sys.exit(0)
+        return sys.exit(0)
 
 
-" Utils Functions "
+""" Utils Functions """
 
 
 def actual_date() -> datetime:
@@ -410,10 +410,10 @@ def actual_date() -> datetime:
 
 def start_program():
     """Starting program and displaying main screen."""
-    MAIN_MENU()
+    return MAIN_MENU()
 
 
-""" Creating and assigning requirement objects. """
+""" Creating and assigning requirement objects """
 # database object
 DB = Database()
 # creating shipments table
@@ -422,4 +422,5 @@ DB.shipments_table_creator()
 MAIN_MENU = MainMenu(ShipmentRegister(), WorkWithShipments(), ShipmentsBoard(), ExitSystem())
 
 if __name__ == "__main__":
+    print(type(DB), type(Database), type(Database()))
     start_program()
