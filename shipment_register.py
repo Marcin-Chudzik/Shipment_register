@@ -1,4 +1,4 @@
-import sqlite3
+from sqlite3 import Error, connect
 import datetime
 import sys
 
@@ -9,7 +9,7 @@ class Database:
     """Class with all functions and objects from database side"""
 
     # assigning requirement variables to create database
-    db_file = sqlite3.connect("shipment_database.db")
+    db_file = connect("shipment_database.db")
     db_manager = db_file.cursor()
 
     def __init__(self):
@@ -40,9 +40,9 @@ class Database:
                     break
                 else:
                     print("Wrong input! (Yes-> Y/N <- No)")
-            except sqlite3.Error:
+            except Error:
                 print("Saving failure!")
-                break
+                return Error
 
     def insert_statement(self, statement: str):
         """Inserting new data into database."""
@@ -54,9 +54,9 @@ class Database:
                     print("Data loaded into database.")
                     break
             # catching Database Error if Manager object received invalid statement.
-            except sqlite3.Error:
+            except Error:
                 print("Inserting data goes wrong.")
-                break
+                return Error
 
     @staticmethod
     def insert_statement_creator() -> str:
@@ -422,5 +422,4 @@ DB.shipments_table_creator()
 MAIN_MENU = MainMenu(ShipmentRegister(), WorkWithShipments(), ShipmentsBoard(), ExitSystem())
 
 if __name__ == "__main__":
-    print(type(DB), type(Database), type(Database()))
     start_program()
